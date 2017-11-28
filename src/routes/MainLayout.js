@@ -25,7 +25,7 @@ class MainLayout extends React.Component {
     const children = this.props.children
     const pathname = this.props.location.pathname
     const tabs = [
-      {title: "场地", key: "home", path: "/", icon: "music"},
+      {title: "场地", key: "home", path: "/home", icon: "music"},
       {title: "房间", key: "room", path: "/room", icon: "users"},
       {title: "列表", key: "list", path: "/list", icon: "list"},
       {title: "我的", key: "mine", path: "/mine", icon: "user-circle"}
