@@ -1,34 +1,39 @@
-import React from "react"
-import {connect} from "dva"
-import {TabBar, NavBar} from "antd-mobile"
-import {Icon} from "react-fa"
-import Home from "../components/Home.js"
-import Room from "../components/Room.js"
+import React from 'react'
+import { connect } from 'dva'
+import { NavBar, TabBar } from 'antd-mobile'
+import { Icon } from 'react-fa'
+import Home from '../components/Home.js'
+import Room from '../components/Room.js'
+import List from '../components/List.js'
+import Mine from '../components/Mine.js'
 
 class MainLayout extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      title: "loop"
+      title: 'loop'
     }
   }
 
-  renderContent(item) {
-    if (item.key === "room") {
+  renderContent (item) {
+    if (item.key === 'room') {
       return <Room/>
+    } else if (item.key === 'list') {
+      return <List/>
+    } else if (item.key === 'mine') {
+      return <Mine/>
     } else {
       return <Home/>
     }
   }
 
-  render() {
-    const children = this.props.children
+  render () {
     const pathname = this.props.location.pathname
     const tabs = [
-      {title: "场地", key: "home", path: "/home", icon: "music"},
-      {title: "房间", key: "room", path: "/room", icon: "users"},
-      {title: "列表", key: "list", path: "/list", icon: "list"},
-      {title: "我的", key: "mine", path: "/mine", icon: "user-circle"}
+      {title: '场地', key: 'home', path: '/home', icon: 'music'},
+      {title: '房间', key: 'room', path: '/room', icon: 'users'},
+      {title: '列表', key: 'list', path: '/list', icon: 'list'},
+      {title: '我的', key: 'mine', path: '/mine', icon: 'user-circle'}
     ].map(item => {
       return <TabBar.Item
         title={item.title}
@@ -43,18 +48,18 @@ class MainLayout extends React.Component {
           })
         }}
       >
-        <div style={{paddingTop: "50px"}}>
+        <div style={{paddingTop: '50px'}}>
           {pathname === item.path ? this.renderContent(item) : null}
         </div>
       </TabBar.Item>
     })
     return (
       <div
-        style={{position: "fixed", height: "100%", width: "100%", top: 0}}>
+        style={{position: 'fixed', height: '100%', width: '100%', top: 0}}>
         <NavBar
           mode="dark"
-          style={{position: "fixed", width: "100%", top: 0, zIndex: 9999, backgroundColor: "#cc154d"}}>
-          {this.state.title || "loop"}</NavBar>
+          style={{position: 'fixed', width: '100%', top: 0, zIndex: 9999, backgroundColor: '#cc154d'}}>
+          {this.state.title || 'loop'}</NavBar>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#cc154d"
