@@ -3,7 +3,7 @@ import { API } from './config'
 import { getToken } from './helper'
 
 axios.defaults.baseURL = API
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(config => {
   try {
@@ -22,7 +22,10 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
   response => {
     if (response.status === 200) {
-      return response
+      if (response.data.code === 0) {
+        return response.data || response
+      }
+      return Promise.reject(response)
     } else {
       return Promise.reject(response)
     }

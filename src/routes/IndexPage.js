@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'dva'
 import axios from 'axios'
+import { NAOMOE } from '../utils/config'
 import { setToken } from '../utils/helper'
 import { Button, Checkbox, Form, Icon, Input } from 'antd'
 import '../styles/login.less'
@@ -12,16 +13,8 @@ class NormalLoginForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        axios.post('/oauth/token', {
-          'grant_type': 'password',
-          'client_id': '3',
-          'client_secret': 'EWw72SDQtX1o797pqPDvvZoiKwiQfHzcCRyXHqUA',
-          'username': values.username,
-          'password': values.password,
-          'scope': '*'
-        }).then(({ data }) => {
-          console.log(data)
-          setToken(data['access_token'])
+        axios.post('/login', values).then(({ data }) => {
+          setToken(data.token)
         })
       }
     })
@@ -32,7 +25,7 @@ class NormalLoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('username', {
+          {getFieldDecorator('name', {
             rules: [{ required: true, message: '请填写用户名' }]
           })(
             <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder="用户名"/>
@@ -56,7 +49,7 @@ class NormalLoginForm extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
-          <a href="">立即注册</a>
+          <a href={NAOMOE + '/register'} target="_blank">立即注册</a>
         </FormItem>
       </Form>
     )
