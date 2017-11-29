@@ -1,19 +1,20 @@
 {
   "entry": "src/index.js",
+  "disableCSSModules": true,
   "env": {
     "development": {
       "extraBabelPlugins": [
         "dva-hmr",
-        "transform-runtime"
+        "transform-runtime",
+        ["import", {"libraryName": "antd", "style": true}]
       ]
     },
     "production": {
       "extraBabelPlugins": [
-        "transform-runtime"
+        "transform-runtime",
+        ["import", {"libraryName": "antd", "style": true}]
       ]
     }
   },
-  "plugins": [
-    ["import", {"libraryName": "antd-mobile", "style": true}]
-  ]
+  "theme": "./src/styles/theme.js"
 }

@@ -1,5 +1,4 @@
 import dva from 'dva'
-import 'antd-mobile/dist/antd-mobile.less'
 import './styles/index.css'
 
 // 1. Initialize
