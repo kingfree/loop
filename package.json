@@ -39,6 +39,7 @@
     "react-router": "^4.2.0"
   },
   "devDependencies": {
+    "axios": "^0.17.1",
     "babel-eslint": "^7.1.1",
     "babel-plugin-dva-hmr": "^0.3.2",
     "babel-plugin-import": "^1.6.2",

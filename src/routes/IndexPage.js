@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'dva'
+import axios from 'axios'
+import { setToken } from '../utils/helper'
 import { Button, Checkbox, Form, Icon, Input } from 'antd'
 import '../styles/login.less'
 
@@ -10,7 +12,17 @@ class NormalLoginForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        axios.post('/oauth/token', {
+          'grant_type': 'password',
+          'client_id': '3',
+          'client_secret': 'EWw72SDQtX1o797pqPDvvZoiKwiQfHzcCRyXHqUA',
+          'username': values.username,
+          'password': values.password,
+          'scope': '*'
+        }).then(({ data }) => {
+          console.log(data)
+          setToken(data['access_token'])
+        })
       }
     })
   }
@@ -20,7 +32,7 @@ class NormalLoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: '请填写用户名' }]
           })(
             <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder="用户名"/>

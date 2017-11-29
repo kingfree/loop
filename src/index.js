@@ -1,4 +1,5 @@
 import dva from 'dva'
+import './utils/axios'
 import './styles/index.css'
 
 // 1. Initialize
