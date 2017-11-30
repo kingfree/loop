@@ -15,6 +15,7 @@ class NormalLoginForm extends React.Component {
       if (!err) {
         axios.post('/login', values).then(({ data }) => {
           setToken(data.token)
+          this.context.router.push('/room')
         })
       }
     })
